@@ -1,0 +1,13 @@
+typedef struct Employee
+{
+    int EmpId;
+    char EmpName[25];
+    float EmpBasicSalary;
+
+    struct HireDate
+    {
+        int date;
+        int month;
+        int year;
+    } HireDate;
+} Employee;
