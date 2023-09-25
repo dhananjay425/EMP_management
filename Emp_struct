@@ -2,7 +2,8 @@
 typedef struct Employee
 {
     int EmpId;
-    char EmpName[25];
+    char FirstName[25];
+    char LastName[25];
     float EmpBasicSalary;
 
     struct HireDate
