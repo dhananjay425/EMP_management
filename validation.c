@@ -1,8 +1,19 @@
-// #include <stdlib.h>
 #include "validation.h"
+int isIdExist(int id, Employee emp[], int employeeCount)
+{
+    for(int i = 0; i < employeeCount; i++)
+    {
+      if(id == emp[i].EmpId)
+        {
+          return 1;
+        }
+    }
+    return 0;
+}
 int isIdValid(int id)
 {
     if(id < 0) return 0;
+  
     return 1;
 }
 int isSalaryValid(int salary)
