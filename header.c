@@ -27,7 +27,6 @@ void addEmployee()
             scanf("%d", &id);
             if(isIdExist(id,emp,employeeCount))
             {
-                system("cls");
                 printf("\nEmployee Id already exists....\n\n please enter unique Employee Id.\n");
                 continue;
             }
@@ -40,7 +39,6 @@ void addEmployee()
                 break;
             else
             {
-                system("cls");
                 printf("\nId is invalid please enter valid Employee Id....\n Id must be numeric and positive.\n");
             }
         }
@@ -61,7 +59,6 @@ void addEmployee()
             if(salaryValid == 1)
                 break;
             else{
-                system("cls");
                 printf("\nSalary can not be zero or nagative.\nPlease enter Positive Salary....\n");
             }
 
@@ -81,7 +78,6 @@ void addEmployee()
                 break;
             }else
             {
-                   system("cls");
                 printf("\nEntered Date is Invalid....\nPlease enter Valid Date.\n");
             }
 
@@ -183,21 +179,31 @@ void updateEmployee()
     {
       printf("\nEnter updated First Name = ");
       scanf("%s", FName);
-    printf("\nEnter updated Last Name = ");
+      printf("\nEnter updated Last Name = ");
       scanf("%s", LName);
-      printf("\nEnter updated Salary = ");
-      scanf("%f", &Salary);
+      
 
       if (strlen(FName) > 0 && strlen(LName))
       {
         strcpy(emp[i].FirstName, FName);
         strcpy(emp[i].LastName, LName);
       }
-
-      if (Salary > 0)
-      {
-        emp[i].EmpBasicSalary = Salary;
-      }
+      int validSalary = 0;
+        while(1)
+        {
+            printf("\nEnter updated Salary = ");
+            scanf("%f", &Salary);   
+            if(isSalaryValid(Salary))
+            {
+                validSalary = 1;
+                    emp[i].EmpBasicSalary = Salary;
+            }else{
+                printf("\nSalary input is Invalid.\n\n please input valid Salary.\n\n");
+            }
+            if(validSalary == 1)
+            break;
+        }
+      
 
       printf("\nDetails Updated Successfully.\n");
       return;
