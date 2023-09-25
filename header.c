@@ -14,22 +14,29 @@ int employeeCount = 0;
 void addEmployee()
 {
     int id ;
-    char name[25];
+    char FName[25];
+    char LName[25];
     float salary;
     int date, month, year;
     if (employeeCount < SIZE)
     {
-            int flag1 = 0, flag2 = 0, flag3 = 0;
+            int idValid = 0, salaryValid = 0, dateValid = 0;
         while(1)
         {
             printf("\nEnter EmpId = ");
-            scanf("%d", &id);   
+            scanf("%d", &id);
+            if(isIdExist(id,emp,employeeCount))
+            {
+                system("cls");
+                printf("\nEmployee Id already exists....\n\n please enter unique Employee Id.\n");
+                continue;
+            }
             if(isIdValid(id))
             {
-                flag1 = 1;
+                idValid = 1;
                 break;
             }
-            if(flag1 == 1)
+            if(idValid == 1)
                 break;
             else
             {
@@ -37,8 +44,10 @@ void addEmployee()
                 printf("\nId is invalid please enter valid Employee Id....\n Id must be numeric and positive.\n");
             }
         }
-        printf("\nEnter Employee Name = ");
-        scanf("%s", name);
+        printf("\nEnter First Name = ");
+        scanf("%s", FName);
+        printf("\nEnter Last Name = ");
+        scanf("%s", LName);
         while(1)
         {
             printf("\nEnter Employee Basic Salary = ");
@@ -46,10 +55,10 @@ void addEmployee()
 
             if(isSalaryValid(salary))
             {
-                flag2 = 1;
+                salaryValid = 1;
                 break;
             }
-            if(flag2 == 1)
+            if(salaryValid == 1)
                 break;
             else{
                 system("cls");
@@ -59,15 +68,15 @@ void addEmployee()
         }
         while(1)
         {
-            printf("\nEnter Hire Date = ");
+            printf("\nEnter Hire Date(dd/mm/yyyy) = ");
             scanf("%d/%d/%d", &date, &month, &year);
             if(isDateValid(date,month,year))
             {
-                flag3 = 1;
+                dateValid = 1;
                 break;
             }
 
-            if(flag3 == 1)
+            if(dateValid == 1)
             {
                 break;
             }else
@@ -77,10 +86,11 @@ void addEmployee()
             }
 
         }
-        if(flag1 == 1 && flag2 == 1 && flag3 == 1)
+        if(idValid == 1 && salaryValid == 1 && dateValid == 1)
         {
             emp[employeeCount].EmpId = id;
-            strcpy(emp[employeeCount].EmpName,name);
+            strcpy(emp[employeeCount].FirstName ,FName);
+            strcpy(emp[employeeCount].LastName ,LName);
             emp[employeeCount].EmpBasicSalary = salary;
             emp[employeeCount].HireDate.date = date;
             emp[employeeCount].HireDate.month = month;
@@ -111,7 +121,7 @@ void showEmployee()
             flag = 1;
             printf("\n\t\t Employee Details ");
             printf("\nEmployee Id = %d", emp[i].EmpId);
-            printf("\nName = %s", emp[i].EmpName);
+            printf("\nName = %s %s", emp[i].FirstName,emp[i].LastName);
             printf("\nBasic Salary = %0.2f", emp[i].EmpBasicSalary);
             float netsal = calcNetSalary(emp[i].EmpBasicSalary);
             printf("\nNet Salary = %0.2f", netsal);
@@ -162,7 +172,8 @@ void updateEmployee()
     printf("Enter Employee id to Update = ");
     scanf("%d", &id);
     int i;
-    char name[50];
+    char FName[25];
+    char LName[25];
     float Salary;
 
   for (i = 0; i < employeeCount; i++)
@@ -170,15 +181,17 @@ void updateEmployee()
 
     if (emp[i].EmpId == id)
     {
-      printf("\nEnter updated Name = ");
-      scanf("%s", name);
-
+      printf("\nEnter updated First Name = ");
+      scanf("%s", FName);
+    printf("\nEnter updated Last Name = ");
+      scanf("%s", LName);
       printf("\nEnter updated Salary = ");
       scanf("%f", &Salary);
 
-      if (strlen(name) > 0)
+      if (strlen(FName) > 0 && strlen(LName))
       {
-        strcpy(emp[i].EmpName, name);
+        strcpy(emp[i].FirstName, FName);
+        strcpy(emp[i].LastName, LName);
       }
 
       if (Salary > 0)
