@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include<windows.h>
 #include "header.h"
+#include<string.h>
 #include "Emp_struct.c"
 #include "validation.c"
 #define SIZE 100
